@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from '../styles/quiz.module.scss';
 
 const QuizPage: React.FC = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -81,27 +82,32 @@ const QuizPage: React.FC = () => {
   ];
 
   return (
-    <div>
+    <div className={styles['quiz-container']}>
       <h1>Interactive Quiz</h1>
       {currentQuestion < questions.length ? (
         <div>
-          <h2>Question {currentQuestion + 1} </h2>
-          <p>{questions[currentQuestion].question}</p>
-          <div>
+          <h2 className={styles['question']}>Question {currentQuestion + 1}</h2>
+          <p className={styles['question']}>
+            {questions[currentQuestion].question}
+          </p>
+          <div className={styles['options']}>
             {questions[currentQuestion].options.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleOptionSelect(option)}
-                style={{
-                  backgroundColor:
-                    selectedOption === option ? 'lightblue' : 'white',
-                }}
+                className={`${styles['option']} ${
+                  selectedOption === option ? styles['selected'] : ''
+                }`}
               >
                 {option}
               </button>
             ))}
           </div>
-          <button onClick={handleNextQuestion} disabled={!selectedOption}>
+          <button
+            onClick={handleNextQuestion}
+            disabled={!selectedOption}
+            className={styles['next-button']}
+          >
             Next
           </button>
         </div>

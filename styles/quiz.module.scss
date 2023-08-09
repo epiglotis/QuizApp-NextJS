@@ -1,0 +1,51 @@
+// styles/quiz.module.scss
+
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .question {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .options {
+    display: flex;
+    justify-content: center; // Center the options horizontally
+    flex-wrap: wrap; // Allow options to wrap to the next line
+    gap: 10px; // Add spacing between options
+  
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: lightblue;
+      }
+  
+      &.selected {
+        background-color: lightblue;
+      }
+    }
+  }
+  
+  .next-button {
+    margin-top: 10px;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+  
