@@ -1,24 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../styles/quiz.module.scss';
 
-const QuizPage: React.FC = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedOption, setSelectedOption] = useState('');
-  const [score, setScore] = useState(0);
-
-  const handleOptionSelect = (option: string) => {
-    setSelectedOption(option);
-  };
-
-  const handleNextQuestion = () => {
-    if (selectedOption === questions[currentQuestion].answer) {
-      setScore(score + 1);
-    }
-    setSelectedOption('');
-    setCurrentQuestion(currentQuestion + 1);
-  };
-
-  const questions = [
+const questions = [
     {
       question: 'What is the capital of France?',
       options: ['Paris', 'Berlin', 'Madrid', 'Rome'],
@@ -80,47 +63,52 @@ const QuizPage: React.FC = () => {
       answer: 'Albert Einstein',
     },
   ];
-
-  return (
-    <div className={styles['quiz-container']}>
-      <h1>Interactive Quiz</h1>
-      {currentQuestion < questions.length ? (
-        <div>
-          <h2 className={styles['question']}>Question {currentQuestion + 1}</h2>
-          <p className={styles['question']}>
-            {questions[currentQuestion].question}
-          </p>
-          <div className={styles['options']}>
-            {questions[currentQuestion].options.map((option, index) => (
-              <button
-                key={index}
-                onClick={() => handleOptionSelect(option)}
-                className={`${styles['option']} ${
-                  selectedOption === option ? styles['selected'] : ''
-                }`}
-              >
-                {option}
-              </button>
-            ))}
+  const QuizPage: React.FC = () => {
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [showScore, setShowScore] = useState(false);
+    const [score, setScore] = useState(0);
+  
+    const handleOptionSelect = (option: string) => {
+      if (option === questions[currentQuestion].answer) {
+        setScore(score + 1);
+      }
+  
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(currentQuestion + 1);
+      } else {
+        setShowScore(true);
+      }
+    };
+  
+    return (
+      <div className={styles['quiz-container']}>
+        {showScore ? (
+          <div>
+            <h1>Quiz Score</h1>
+            <p>Your score: {score}/{questions.length}</p>
+            <button onClick={() => { setShowScore(false); setCurrentQuestion(0); setScore(0); }}>
+              Return to Quiz
+            </button>
           </div>
-          <button
-            onClick={handleNextQuestion}
-            disabled={!selectedOption}
-            className={styles['next-button']}
-          >
-            Next
-          </button>
-        </div>
-      ) : (
-        <div>
-          <h2>Quiz completed!</h2>
-          <p>
-            Your score: {score}/{questions.length}
-          </p>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default QuizPage;
+        ) : (
+          <div>
+            <h1>Interactive Quiz</h1>
+            <p>Question {currentQuestion + 1}/{questions.length}</p>
+            <p>{questions[currentQuestion].question}</p>
+            <div className={styles['options']}>
+              {questions[currentQuestion].options.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleOptionSelect(option)}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+  
+  export default QuizPage;

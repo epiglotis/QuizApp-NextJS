@@ -1,14 +1,21 @@
 // pages/login.tsx
 
-import React, { useState } from 'react';
-import styles from '../styles/login.module.scss'; // Import SCSS styles
+import { useState } from 'react';
+import styles from '../styles/login.module.scss';
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie'; // Import the 'js-cookie' library
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const handleLogin = () => {
-    console.log('Login clicked with username:', username);
+    // Set a cookie to indicate the user is logged in
+    Cookies.set('isLoggedIn', 'true');
+    
+    // Redirect to the quiz page after login
+    router.push('/');
   };
 
   return (
