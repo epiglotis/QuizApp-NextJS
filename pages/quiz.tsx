@@ -80,7 +80,41 @@ const QuizPage: React.FC = () => {
     },
   ];
 
-  return <div>{}</div>;
+  return (
+    <div>
+      <h1>Interactive Quiz</h1>
+      {currentQuestion < questions.length ? (
+        <div>
+          <h2>Question {currentQuestion + 1} </h2>
+          <p>{questions[currentQuestion].question}</p>
+          <div>
+            {questions[currentQuestion].options.map((option, index) => (
+              <button
+                key={index}
+                onClick={() => handleOptionSelect(option)}
+                style={{
+                  backgroundColor:
+                    selectedOption === option ? 'lightblue' : 'white',
+                }}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+          <button onClick={handleNextQuestion} disabled={!selectedOption}>
+            Next
+          </button>
+        </div>
+      ) : (
+        <div>
+          <h2>Quiz completed!</h2>
+          <p>
+            Your score: {score}/{questions.length}
+          </p>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default QuizPage;
