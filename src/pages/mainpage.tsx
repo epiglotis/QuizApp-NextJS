@@ -1,8 +1,8 @@
 // src/pages/mainpage.tsx
 
 import React from 'react';
-import { logoutUser } from '../authService';
 import { useRouter } from 'next/router';
+import { logoutUser } from '../authService';
 import styles from '../styles/mainpage.module.scss'; // Import the SCSS styles
 
 export default function MainPage() {
@@ -10,6 +10,10 @@ export default function MainPage() {
 
   const handleQuizButtonClick = () => {
     router.push('/quiz'); // Redirect to the quiz page
+  };
+
+  const handleCalculatorButtonClick = () => {
+    router.push('/calculator'); // Redirect to the calculator page
   };
 
   const handleLogout = () => {
@@ -23,6 +27,9 @@ export default function MainPage() {
       <h1>Welcome! Choose an option:</h1>
       <button className={styles['main-page-button']} onClick={handleQuizButtonClick}>
         Start Quiz
+      </button>
+      <button className={styles['main-page-button']} onClick={handleCalculatorButtonClick}>
+        Open Calculator
       </button>
       <button className={styles['main-page-button']} onClick={handleLogout}>
         Log out
