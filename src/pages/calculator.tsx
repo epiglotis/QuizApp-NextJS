@@ -23,10 +23,8 @@ export default function CalculatorPage() {
     }
   };
 
-  const handleLogout = () => {
-    logoutUser();
-    // Redirect to login page after logout
-    window.location.href = '/login';
+  const handleReturnToMainPage = () => {
+    router.push("/")
   };
 
   return (
@@ -51,8 +49,8 @@ export default function CalculatorPage() {
         <button onClick={() => handleButtonClick('=')}>=</button>
         <button onClick={() => handleButtonClick('/')}>/</button>
       </div>
-      <button className={styles['logout-button']} onClick={handleLogout}>
-        Log out
+      <button className={styles['logout-button']} onClick={handleReturnToMainPage}>
+        Return to Main Page
       </button>
     </div>
   );
