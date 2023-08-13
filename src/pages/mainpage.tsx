@@ -16,8 +16,8 @@ export default function MainPage() {
     router.push('/calculator'); // Redirect to the calculator page
   };
 
-  const handleMemoryGameButtonClick = () => {
-    router.push('/memorygame'); // Redirect to the memory game page
+  const handleRollDiceButtonClick = () => {
+    router.push('/rolldice'); // Redirect to the memory game page
   };
 
   const handleLogout = () => {
@@ -35,8 +35,8 @@ export default function MainPage() {
       <button className={styles['main-page-button']} onClick={handleCalculatorButtonClick}>
         Open Calculator
       </button>
-      <button className={styles['main-page-button']} onClick={handleMemoryGameButtonClick}>
-        Play Memory Game
+      <button className={styles['main-page-button']} onClick={handleRollDiceButtonClick}>
+        Roll Dice
       </button>
       <button className={styles['main-page-button']} onClick={handleLogout}>
         Log out
